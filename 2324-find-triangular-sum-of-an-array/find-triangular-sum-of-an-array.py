@@ -1,12 +1,17 @@
 class Solution:
     def triangularSum(self, nums: List[int]) -> int:
-        result = []
-        while len(nums) > 1:
-            for i in range(1, len(nums)):
-                s = nums[i] + nums[i-1]
-                if s >= 10:
-                    s -= 10
-                result.append(s)
-            nums = result
-            result = []
+        newNums = []
+
+        i = 0
+        while True:
+            if len(nums) == 1:
+                break
+            if i+1 == len(nums):
+                nums = newNums
+                newNums = []
+                i = 0
+                continue
+            sum = ( nums[i] + nums[i+1] ) % 10
+            newNums.append(sum)
+            i += 1
         return nums[0]
