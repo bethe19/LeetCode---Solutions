@@ -1,11 +1,17 @@
 class Solution:
     def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        map = {}
+        for i in arr1:
+            if i in map:
+                map[i] += 1
+            else:
+                map[i] = 1
         result = []
-        for num in arr2:
-            i = 0
-            while i < len(arr1):
-                if arr1[i] == num:
-                    result.append(arr1.pop(i))
-                    continue
-                i+=1
-        return result + sorted(arr1)
+        for i in arr2:
+            if i in map:
+                result.extend([i]*map[i])
+                del map[i]
+        remaining = sorted(map.keys())
+        for i in remaining:
+            result.extend([i] * map[i])
+        return result
