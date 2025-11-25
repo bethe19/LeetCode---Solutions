@@ -1,12 +1,10 @@
 class Solution:
     def frequencySort(self, nums: List[int]) -> List[int]:
-        frequency = []
+        map = {}
         for i in nums:
-            count = 0 
-            for j in nums:
-                if i == j:
-                    count += 1
-            frequency.append((i,count))
-        result = [i for i,j in sorted(frequency, key=lambda t: (t[1], -t[0]))]
-
+            if i in map:
+                map[i] += 1
+            else:
+                map[i] = 1
+        result = sorted(nums, key=lambda x: (map[x], -x))
         return result
