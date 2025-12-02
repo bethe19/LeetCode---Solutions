@@ -1,13 +1,16 @@
 class Solution:
     def simplifyPath(self, path: str) -> str:
         stack = []
-        parts = path.split('/')
-        for part in parts:
-            if part == '' or part == '.':
+        path = path.split('/')
+        
+        for i in path:
+            if i=='.' or i == "":
                 continue
-            elif part == '..':
+            elif i == '..':
                 if stack:
                     stack.pop()
             else:
-                stack.append(part)
-        return '/' + '/'.join(stack)
+                stack.append(i)
+        path = '/' + "/".join(stack)
+
+        return path
